@@ -1,0 +1,7 @@
+torch
+transformers
+pyautogui
+pynput
+PyQt6
+huggingface-hub
+accelerate
