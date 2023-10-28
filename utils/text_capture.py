@@ -9,8 +9,9 @@ def dummy_print(text):
 
 
 def copy_clipboard():
-    pya.hotkey('ctrl', 'c')
-    time.sleep(.01)
+    # time.sleep(.1)
+    # pya.hotkey('ctrl', 'c')
+    # time.sleep(.1)
     return pyperclip.paste()
 
 
@@ -22,7 +23,7 @@ def capture_hotkey_handler():
     text_process_handler(copy_text)
 
 
-def start_caption_daemon(hotkey='<ctrl>+y', handler=dummy_print):
+def start_capture_daemon(hotkey='<alt>+y', handler=dummy_print):
     global text_process_handler
     text_process_handler = handler
     with keyboard.GlobalHotKeys({
