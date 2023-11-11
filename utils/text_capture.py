@@ -1,7 +1,7 @@
 import pyautogui as pya
 from pynput import keyboard
 import pyperclip
-import time
+#import time
 
 
 def dummy_print(text):

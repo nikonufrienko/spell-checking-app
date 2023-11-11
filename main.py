@@ -1,15 +1,17 @@
-# TODO[nikonufrienko]: Add GUI implementation
 from utils.text_capture import start_capture_daemon
+import subprocess
 from utils.spelling import SpellCorrector
 import torch
 
 corrector = None
 
 
-def print_corrected(text):
+def print_corrected(original_str):
+    print("!")
     global corrector
-    print("Processing...")
-    print(corrector.predict(text))
+    modified_str = corrector.predict(original_str)
+    args = ['-i', original_str, '-c', modified_str]
+    subprocess.run(["python", "display_results.py"] + args, check=True)
 
 
 if __name__ == '__main__':

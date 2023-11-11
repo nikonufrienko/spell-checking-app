@@ -20,6 +20,12 @@ if [ ! -d $MODELS_PATH/$MODEL_DIR_NAME ]; then
                     snapshot_download( \
                         repo_id=\"${MODEL_REPO_ID}\", \
                         local_dir=\"${MODELS_PATH}/${MODEL_DIR_NAME}\", \
-                        local_dir_use_symlinks=False \
+                        local_dir_use_symlinks=False, \
+                        allow_patterns=[ \
+                            \"*.md\", \
+                            \"*.json\", \
+                            \"*.model\", \
+                            \"*.safetensors\" \
+                            ] \
                     )"
 fi
