@@ -2,8 +2,9 @@ import argparse
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel
 from PyQt5.QtWidgets import QPushButton, QSizePolicy, QTextEdit, QHBoxLayout
-from PyQt5.QtGui import QIcon, QPalette, QTextOption
-from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QSplitter
+from PyQt5.QtGui import QIcon, QPalette
+from PyQt5.QtCore import QSize, Qt
 import html
 
 import difflib
@@ -70,7 +71,7 @@ class ArrowLabel(QWidget):
         pixmap = icon.pixmap(QSize(64, 64))
         label.setPixmap(pixmap)
         self.setMinimumSize(100, 100)
-        self.setMaximumSize(300, 300)
+        self.setMaximumSize(200, 10000)
         label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         label.resizeEvent = lambda event: self.on_resize(label, icon)
         layout = QVBoxLayout(self)
@@ -98,17 +99,20 @@ class DisplayResult(QWidget):
         original, modified = get_colored(self.original_str, self.modified_str)
         self.set_colored_text(self.te_input, original)
         self.set_colored_text(self.te_corrected, modified)
-        layout.addWidget(self.te_input)
-        left_area = QWidget()
-        left_layout = QVBoxLayout()
-        self.te_input.setStyleSheet('QTextEdit * { display: normal; }')
-        self.te_corrected.setStyleSheet('QTextEdit * { display: normal; }')
-        left_area.setLayout(left_layout)
-        left_layout.addWidget(self.te_corrected)
-        left_layout.addWidget(CopyButton(modified_str=self.modified_str))
-        layout.addWidget(ArrowLabel())
-        layout.addWidget(left_area)
+        right_area = QWidget()
+        right_layout = QVBoxLayout()
+        self.te_input.setStyleSheet('QTextEdit { white-space: break-spaces; }')
+        self.te_corrected.setStyleSheet('QTextEdit { white-space: break-spaces; }')
+        right_area.setLayout(right_layout)
 
+        right_layout.addWidget(self.te_corrected)
+        right_layout.addWidget(CopyButton(modified_str=self.modified_str))
+        splitter = QSplitter(Qt.Horizontal)
+        splitter.addWidget(self.te_input)
+        splitter.addWidget(ArrowLabel())
+        splitter.addWidget(right_area)
+        splitter.setStretchFactor(0, 1)
+        layout.addWidget(splitter)
         self.setLayout(layout)
         self.setWindowTitle("Spell checker")
 

@@ -5,3 +5,5 @@ pynput
 PyQt6
 huggingface-hub
 accelerate
+simple_term_menu
+SentencePiece
