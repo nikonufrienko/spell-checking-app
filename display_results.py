@@ -49,7 +49,7 @@ class CopyButton(QWidget):
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         button.setSizeIncrement(10, 10)
         self.setMinimumSize(100, 50)
-        #self.setMaximumSize(30000, 120)
+        self.setMaximumSize(30000, 120)
         button.resizeEvent = lambda event: self.on_resize(button, icon)
         button.clicked.connect(lambda event: pyperclip.copy(modified_str))
         layout = QVBoxLayout(self)

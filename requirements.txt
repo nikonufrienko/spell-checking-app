@@ -2,7 +2,7 @@ torch
 transformers
 pyautogui
 pynput
-PyQt6
+PyQt5
 huggingface-hub
 accelerate
 simple_term_menu

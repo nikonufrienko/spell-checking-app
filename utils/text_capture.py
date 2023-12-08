@@ -1,7 +1,5 @@
-import pyautogui as pya
 from pynput import keyboard
 import pyperclip
-#import time
 
 
 def dummy_print(text):
@@ -9,9 +7,6 @@ def dummy_print(text):
 
 
 def copy_clipboard():
-    # time.sleep(.1)
-    # pya.hotkey('ctrl', 'c')
-    # time.sleep(.1)
     return pyperclip.paste()
 
 
@@ -30,6 +25,3 @@ def start_capture_daemon(hotkey='<alt>+y', handler=dummy_print):
             hotkey: capture_hotkey_handler}) as h:
         h.join()
 
-
-def get_cursor_pos():
-    return pya.position()
